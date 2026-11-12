@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ClipForge – ตัดต่อวิดีโอออนไลน์</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0f1115;--p1:#171a21;--p2:#1f232d;--bd:#2c3140;--tx:#e8eaf0;--mu:#8b93a7;--ac:#22d3ee;--ac2:#a78bfa;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:14px Sarabun,system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+button,select,input,textarea{font:inherit;color:inherit}
+button{background:var(--p2);border:1px solid var(--bd);border-radius:8px;padding:6px 11px;cursor:pointer}
+button:hover{border-color:var(--ac)}button.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#06121a;border:0;font-weight:700}
+input[type=text],textarea,select{background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;width:100%}
+header{display:flex;gap:8px;align-items:center;padding:8px 12px;background:var(--p1);border-bottom:1px solid var(--bd);flex-wrap:wrap}
+header b{font-size:16px;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+#pn{width:180px}#sv{color:var(--mu);font-size:12px}.sp{flex:1}
+main{flex:1;display:grid;grid-template-columns:230px 1fr 250px;min-height:0}
+aside{background:var(--p1);padding:10px;overflow:auto;border-right:1px solid var(--bd)}
+aside.r{border-right:0;border-left:1px solid var(--bd)}
+h4{margin:0 0 8px;font-size:12px;color:var(--mu);letter-spacing:.05em}
+.mi{display:flex;gap:6px;align-items:center;background:var(--p2);border:1px solid var(--bd);border-radius:8px;padding:6px;margin-bottom:6px;cursor:pointer}
+.mi:hover{border-color:var(--ac)}.mi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.stage{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;min-width:0;min-height:0;gap:8px}
+#cv{max-width:100%;max-height:100%;min-height:0;flex:1;object-fit:contain;background:#000;border-radius:6px;box-shadow:0 0 0 1px var(--bd)}
+.ctl{display:flex;gap:8px;align-items:center}
+.tools{display:flex;gap:6px;padding:6px 10px;background:var(--p1);border-top:1px solid var(--bd);align-items:center;flex-wrap:wrap}
+#tw{height:190px;overflow:auto;background:var(--bg);position:relative;border-top:1px solid var(--bd)}
+#tl{position:relative;min-height:100%}
+.rul{height:22px;border-bottom:1px solid var(--bd);position:relative;background:var(--p1)}
+.rul i{position:absolute;top:0;height:100%;border-left:1px solid var(--bd);font-style:normal;font-size:10px;color:var(--mu);padding-left:3px}
+.row{height:44px;border-bottom:1px solid #1a1d26;position:relative}
+.clip{position:absolute;top:4px;height:36px;border-radius:6px;padding:0 10px;display:flex;align-items:center;font-size:12px;overflow:hidden;white-space:nowrap;cursor:grab;color:#06121a;font-weight:600;user-select:none;border:2px solid transparent}
+.clip.v{background:#38bdf8}.clip.a{background:#4ade80}.clip.t{background:#fbbf24}.clip.sel{border-color:#fff}
+.clip b{position:absolute;top:0;width:8px;height:100%;cursor:ew-resize;background:rgba(0,0,0,.35)}
+.clip b.l{left:0}.clip b.rr{right:0}
+#ph{position:absolute;top:0;bottom:0;width:2px;background:#f43f5e;pointer-events:none;z-index:5}
+.f{margin-bottom:10px}.f label{display:flex;justify-content:space-between;color:var(--mu);font-size:12px;margin-bottom:3px}
+.f input[type=range]{width:100%}.hint{color:var(--mu);font-size:12px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:50}.ov[hidden]{display:none}
+.box{background:var(--p1);border:1px solid var(--bd);border-radius:12px;padding:18px;width:min(460px,92vw);max-height:80vh;overflow:auto}
+.pr{display:flex;gap:6px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:8px;margin:6px 0}.pr div{flex:1}
+progress{width:100%;height:12px}
+:root{--bg:#090a10;--p1:#11131b;--p2:#1a1d29;--bd:#262a3b;--ac3:#f472b6}
+body{background:radial-gradient(1100px 560px at 15% -10%,#241a52 0,transparent 60%),radial-gradient(900px 500px at 100% 0,#0a2f3d 0,transparent 55%),var(--bg)}
+header{background:rgba(17,19,27,.65);backdrop-filter:blur(14px);padding:10px 18px;gap:10px;border-bottom:1px solid rgba(255,255,255,.07)}
+header b{font-size:20px;letter-spacing:.02em}
+button{border-radius:10px;padding:7px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);transition:.15s}
+button:hover{transform:translateY(-1px);background:rgba(255,255,255,.1);border-color:var(--ac);box-shadow:0 6px 18px rgba(34,211,238,.15)}
+button.pri{background:linear-gradient(135deg,var(--ac),var(--ac2) 60%,var(--ac3));box-shadow:0 6px 22px rgba(167,139,250,.35);border:0}
+input[type=text],textarea,select{border-radius:10px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
+input[type=range]{accent-color:var(--ac)}
+main{gap:12px;padding:12px 12px 8px}
+aside,aside.r{background:rgba(17,19,27,.78);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:14px}
+h4{font-size:12px;color:var(--ac);font-weight:700}
+.mi{border-radius:12px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);padding:8px 10px}
+.mi:hover{background:rgba(34,211,238,.08);transform:translateX(2px)}
+.stage{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.06);border-radius:18px;gap:12px}
+#cv{border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.09)}
+#tm{font-variant-numeric:tabular-nums;background:rgba(255,255,255,.06);padding:5px 12px;border-radius:99px;font-size:13px}
+.tools{margin:0 12px;border:1px solid rgba(255,255,255,.07);border-radius:14px 14px 0 0;background:rgba(17,19,27,.85)}
+#tw{margin:0 12px 12px;border:1px solid rgba(255,255,255,.07);border-top:0;border-radius:0 0 14px 14px;background:#0b0d13;height:200px}
+.rul{background:#10121a}.row{height:44px;background:repeating-linear-gradient(90deg,transparent 0,transparent 79px,rgba(255,255,255,.025) 79px,rgba(255,255,255,.025) 80px)}
+.clip{border-radius:9px;box-shadow:0 3px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);border:2px solid transparent;transition:box-shadow .15s}
+.clip.v{background:linear-gradient(180deg,#5ccbff,#0ea5e9)}.clip.a{background:linear-gradient(180deg,#6ee7a0,#16a34a)}.clip.t{background:linear-gradient(180deg,#fde047,#f59e0b)}
+.clip.sel{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2),0 6px 16px rgba(0,0,0,.5)}
+.clip b{background:rgba(0,0,0,.25);border-radius:6px}
+#ph{background:#f43f5e;box-shadow:0 0 10px #f43f5e}#ph::before{content:'';position:absolute;top:0;left:-6px;border:7px solid transparent;border-top-color:#f43f5e}
+.mk{position:absolute;pointer-events:none;z-index:3;border:1px dashed #f43f5e;border-radius:8px;background:repeating-linear-gradient(45deg,rgba(244,63,94,.38) 0 6px,rgba(244,63,94,.16) 6px 12px)}
+.plg{position:fixed;right:20px;top:76px;width:320px;max-height:calc(100% - 120px);overflow:auto;z-index:40;background:rgba(17,19,27,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;box-shadow:0 24px 70px rgba(0,0,0,.6)}.plg[hidden]{display:none}
+.sg{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.04);margin:4px 0;cursor:pointer;font-size:13px}.sg span{flex:1}.sg:hover{background:rgba(244,63,94,.12)}
+kbd{background:rgba(255,255,255,.1);border-radius:5px;padding:0 6px;font:12px monospace;margin-left:4px}
+.box{border-radius:18px;background:rgba(17,19,27,.96);border-color:rgba(255,255,255,.1)}
+.pr{border-radius:12px;background:rgba(255,255,255,.03)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#2c3247;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+@media(max-width:820px){main{grid-template-columns:1fr}aside{display:none}aside.show{display:block}}
+
+:root{--bg:#141414;--p1:#232323;--p2:#2e2e2e;--bd:#3a3a3a;--tx:#e9e9e9;--mu:#8d8d8d;--ac:#19d3e3;--ac2:#19d3e3;--ac3:#19d3e3}
+body{background:var(--bg);font-size:13px}
+[hidden]{display:none!important}
+.top{height:44px;display:grid;grid-template-columns:1fr minmax(120px,300px) 1fr;align-items:center;padding:0 12px;gap:10px;background:#1b1b1b;flex:none}
+.logo{font-size:15px;white-space:nowrap}
+#pn{text-align:center;background:transparent;border:0;font-weight:700;width:100%}#pn:hover,#pn:focus{background:var(--p2);outline:0}
+.tr{display:flex;gap:8px;align-items:center;justify-content:flex-end}#as{width:auto;padding:4px 8px;border-radius:6px}
+button{background:var(--p2);border:0;border-radius:6px;padding:6px 12px;box-shadow:none}
+button:hover{background:#3b3b3b;transform:none;box-shadow:none}
+button.pri,button.exp{background:var(--ac);color:#04161a;font-weight:700;box-shadow:none}button.pri:hover,button.exp:hover{background:#55e6f2}
+.app{flex:1;min-height:0;display:grid;grid-template-columns:minmax(340px,38%) 1fr;grid-template-rows:minmax(0,56fr) minmax(0,44fr);gap:8px;padding:8px}
+.panel{background:var(--p1);border-radius:10px;display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.phd{padding:12px 16px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;flex:none;color:var(--ac)}.phd small{color:var(--mu);font-weight:400}
+.tabs{display:flex;gap:2px;padding:6px 8px 0;border-bottom:1px solid #191919;flex:none}
+.tab{background:none;color:#aaa;border-radius:6px 6px 0 0;padding:8px 14px}.tab:hover{background:none;color:#fff}.tab.on{color:var(--ac);box-shadow:inset 0 -2px var(--ac)}
+#bau{margin:0 0 6px auto;background:linear-gradient(135deg,#19d3e3,#a78bfa);color:#04161a;font-weight:700;border-radius:6px}#bau:hover{filter:brightness(1.1);background:linear-gradient(135deg,#19d3e3,#a78bfa)}
+.pb{flex:1;overflow:auto;padding:14px;min-height:0}
+.drop{background:#2c2c2c;border-radius:10px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-align:center;color:var(--mu);padding:10px}.drop:hover{background:#333}
+.drop .plus{width:28px;height:28px;border-radius:50%;background:var(--ac);color:#04161a;font-size:20px;line-height:28px;font-weight:700}.drop b{color:var(--tx);font-size:14px}
+#lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;margin-top:12px}
+.mi{flex-direction:column;justify-content:center;text-align:center;height:84px;background:#2c2c2c;border:1px solid transparent;border-radius:8px;font-size:20px;gap:2px}.mi:hover{border-color:var(--ac);background:#323232;transform:none}.mi span{font-size:11px;max-width:100%}.mi small{color:var(--mu);font-size:11px}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tp{height:78px;background:#2c2c2c;font-size:20px;font-weight:700;border-radius:8px}.tp:hover{outline:1px solid var(--ac)}
+.vw{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 12px;background:#1a1a1a}
+.vw #cv{flex:none;width:auto;height:auto;max-width:100%;max-height:100%;border-radius:0;box-shadow:none}
+.pbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 16px;flex:none}#tm{color:var(--mu);font-variant-numeric:tabular-nums;background:none;padding:0}
+#bpl{min-width:92px;border-radius:99px}
+#pp{padding:0 18px 14px;overflow:auto;flex:1;min-height:0}.kv{display:flex;padding:9px 0;font-size:13px;border-bottom:1px solid #2b2b2b}.kv span{width:120px;color:var(--mu);flex:none}
+.tb{display:flex;align-items:center;gap:2px;padding:6px 10px;border-bottom:1px solid #191919;flex:none;flex-wrap:wrap}.tb button{background:none;color:#bbb;font-size:15px;padding:5px 9px}.tb button:hover{background:#333;color:var(--ac)}.tb kbd{margin-left:3px;font-size:10px;opacity:.6}.tb .sp{flex:1}
+.tlp #tw{flex:1;height:auto;margin:0;border:0;border-radius:0;background:#1b1b1b;min-height:0}
+.rul{background:#202020}.clip{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5);box-shadow:none;border-radius:6px}
+.clip.v{background:#2a7f93}.clip.a{background:#2f8a62}.clip.t{background:#b98a2c}.clip.sel{border-color:#fff;box-shadow:none}
+#ph{background:#fff;box-shadow:none}#ph::before{border-top-color:#fff}
+.emp{position:absolute;left:24px;width:min(620px,60vw);top:76px;height:60px;border-radius:8px;background:#232323;color:#9a9a9a;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.plg{position:fixed;inset:0;width:auto;max-height:none;padding:0;border:0;border-radius:0;background:var(--bg);backdrop-filter:none;box-shadow:none;z-index:60;display:flex;flex-direction:column;overflow:hidden}.plg[hidden]{display:none}
+.ttl{text-align:center;font-size:15px}
+.aub{flex:1;min-height:0;display:grid;grid-template-columns:1fr 330px;gap:8px;padding:8px}.aul,.aur{background:var(--p1);border-radius:10px;overflow:auto;min-height:0;display:flex;flex-direction:column}.aur{padding:6px 18px 18px}
+.wvw{height:min(300px,38vh);margin:0 16px;background:#1a1a1a;border-radius:8px;flex:none}#au-wv{width:100%;height:100%;display:block;cursor:pointer}
+#au-ls{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:0 16px 16px;align-content:start}
+.sg{margin:0;background:#2c2c2c}
+@media(max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:repeat(4,minmax(260px,1fr));overflow:auto}.aub{grid-template-columns:1fr;overflow:auto}}
+
+body.pl-open .app{margin-right:calc(min(440px,38vw) + 8px)}
+.plg{inset:52px 8px 8px auto;width:min(440px,38vw);border-radius:12px;border:1px solid #4a1a28;background:radial-gradient(130% 55% at 100% 0,#3d0e1f 0,#1a0a10 50%,#0e0709 100%);box-shadow:0 10px 40px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.plh{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #3a1420;flex:none}
+.plh .dot{width:10px;height:10px;border-radius:50%;background:#ef2d56;box-shadow:0 0 10px #ef2d56}.plh b{letter-spacing:.14em;font-size:13px}
+.bdg{margin-left:auto;font-size:10px;letter-spacing:.12em;color:#ef2d56;border:1px solid #ef2d5666;border-radius:99px;padding:3px 9px}.plh button{padding:3px 9px}
+.plb{flex:1;overflow:auto;padding:12px 14px 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stats div{background:rgba(255,255,255,.04);border:1px solid #3a1420;border-radius:10px;padding:8px 10px}.stats small{display:block;color:#b98a94;font-size:10px}.stats b{font-size:18px}
+.sec{margin:14px 0 6px;font-size:11px;letter-spacing:.1em;color:#ef6b88;font-weight:700}
+.plg .wvw{margin:0;height:130px;background:#12070b;border:1px solid #3a1420}
+.plg .f label{color:#c9a2ab}.plg input[type=range]{accent-color:#ef2d56}
+.rb{background:linear-gradient(135deg,#ef2d56,#ff6a3d)!important;color:#fff;font-weight:700;width:100%;padding:10px;margin-top:8px}.rb:hover{filter:brightness(1.12)}
+.plg #au-ls{display:block;padding:0}.plg .sg{background:rgba(255,255,255,.05);border:1px solid #3a1420}.plg .sg:hover{background:rgba(239,45,86,.18)}.plg #au-go{width:100%}
+.ptabs{gap:2px;padding:6px 12px 0!important;border-bottom:1px solid #191919}
+.ptb{background:none;color:#aaa;border-radius:6px 6px 0 0;padding:8px 12px}.ptb.on{color:var(--ac);box-shadow:inset 0 -2px var(--ac)}.ptb:hover{background:none;color:#fff}
+.sh{display:flex;align-items:center;justify-content:space-between;font-weight:700;margin:14px 0 8px}.sh button{padding:2px 8px;background:none;font-size:15px}
+.rw{display:grid;grid-template-columns:96px 1fr 64px 18px;gap:8px;align-items:center;margin:9px 0}.rw span{color:#ddd}.rw em{color:var(--mu);font-style:normal;font-size:12px}
+.nb{width:64px!important;text-align:center;padding:4px!important}#pp textarea{width:100%;margin-bottom:6px}
+.clip.v{background-color:#1f6a78;background-size:auto 100%;background-repeat:repeat-x;background-blend-mode:multiply;align-items:flex-start;padding-top:3px}
+
+#bom{margin:0 0 6px auto;background:linear-gradient(135deg,#f97316,#fbbf24);color:#1a0a00;font-weight:700;border-radius:6px}#bom:hover{filter:brightness(1.1);background:linear-gradient(135deg,#f97316,#fbbf24)}#bau{margin-left:6px}
+.omp{position:fixed;inset:52px 8px 8px auto;width:min(360px,38vw);z-index:60;display:flex;flex-direction:column;overflow:hidden;border-radius:12px;border:1px solid #5a3414;background:radial-gradient(130% 55% at 100% 0,#47220a 0,#1a0f08 50%,#0e0906 100%);box-shadow:0 10px 40px rgba(0,0,0,.6)}
+body.om-open .app{margin-right:calc(min(360px,38vw) + 8px)}
+.omp .plh{border-bottom-color:#4a2a12}.omp .dot{background:#f97316;box-shadow:0 0 10px #f97316}.omp .sec{color:#fb923c}.omp .f label{color:#e0bd9c}.omp input[type=range]{accent-color:#f97316}.omp #om-yes{background:linear-gradient(135deg,#f97316,#fbbf24)!important;color:#1a0a00}
+</style></head><body>
+<div class="top"><div class="logo">🎬 <b>ClipForge</b></div><input id="pn" type="text" aria-label="ชื่อโปรเจกต์"><div class="tr"><select id="as"><option value="1920x1080">16:9 • 1080p</option><option value="1280x720">16:9 • 720p</option><option value="3840x2160">16:9 • 4K</option><option value="1080x1920">9:16 TikTok/Reels</option><option value="1080x1080">1:1</option><option value="1080x1350">4:5</option></select><span id="sv" style="color:var(--mu);font-size:12px"></span><button id="bp">📁 โปรเจกต์</button><button id="bs">💾 บันทึก</button><button id="be" class="exp">⬆ ส่งออก</button></div></div>
+<div class="app">
+<section class="panel"><div class="tabs"><button class="tab on" data-p="media">▶ สื่อ</button><button class="tab" data-p="text">TI ข้อความ</button><button id="bom">📺 OME TV</button><button id="bau">✨ ออโต้คัท</button></div>
+<div class="pb" id="pane-media"><div id="bi" class="drop"><span class="plus">+</span><b>นำเข้า</b><span>ลากและวางไฟล์วิดีโอ รูปภาพ และไฟล์เสียงที่นี่</span></div><input id="fi" type="file" accept="video/*,audio/*,image/*" multiple hidden><div id="lib"></div></div>
+<div class="pb" id="pane-text" hidden><div class="tgrid"><button class="tp" data-t="หัวข้อ" data-s="140" data-c="#ffffff" data-y="50">หัวข้อ</button><button class="tp" data-t="คำบรรยาย" data-s="80" data-c="#ffffff" data-y="86" style="font-size:15px">คำบรรยาย</button><button class="tp" data-t="ไฮไลต์" data-s="110" data-c="#ffe14d" data-y="50" style="color:#ffe14d">ไฮไลต์</button><button class="tp" data-t="นีออน" data-s="110" data-c="#19e3f0" data-y="50" style="color:#19e3f0">นีออน</button></div></div></section>
+<section class="panel"><div class="phd">ตัวเล่น</div><div class="vw"><canvas id="cv"></canvas></div><div class="pbar"><span id="tm"></span><button id="bpl" class="pri">▶ เล่น</button><span></span></div></section>
+<section class="panel"><div class="phd" id="dh">รายละเอียด</div><div id="pp"></div></section>
+<section class="panel tlp"><div class="tb"><button id="bsp" title="ตัด (S)">✂<kbd>S</kbd></button><button id="bdb" title="ลบหน้า (A)">⇤<kbd>A</kbd></button><button id="bda" title="ลบหลัง (Q)">⇥<kbd>Q</kbd></button><button id="bde" title="ลบ (D)">🗑<kbd>D</kbd></button><button id="bdu" title="ทำซ้ำ">⧉</button><button id="btx" title="เพิ่มข้อความ">TI</button><button id="bun" title="ย้อนกลับ (Ctrl+Z)">↶</button><span class="sp"></span><span style="color:var(--mu)">🔍</span><input id="zm" type="range" min="20" max="240" value="80" style="width:110px"></div><div id="tw"><div id="tl"></div></div></section>
+</div>
+<div class="ov" id="ovp" hidden><div class="box"><div style="display:flex"><h3 style="margin:0;flex:1">โปรเจกต์ที่บันทึกไว้</h3><button id="pc">✕</button></div><button id="pnw" class="pri" style="margin-top:10px">＋ โปรเจกต์ใหม่</button><div id="pl"></div></div></div>
+<div class="plg" id="plg" hidden><div class="plh"><i class="dot"></i><b>AUTO CLIPPER</b><span class="bdg">AI DETECTION ENGINE</span><button id="au-x" title="ปิด">✕</button></div>
+<div class="plb"><div class="stats"><div><small>ช่วงที่ตรวจพบ</small><b id="st1">0</b></div><div><small>ประหยัดเวลา</small><b id="st2">0.0s</b></div><div><small>ความยาวหลังตัด</small><b id="st3">0:00.0</b></div></div>
+<div class="sec">คลื่นเสียง · แถบแดง = ช่วงที่จะตัด</div><div class="wvw"><canvas id="au-wv"></canvas></div><p id="au-st" class="hint"></p>
+<div class="sec">ตั้งค่าการตรวจจับ</div>
+<div class="f"><label>ความไว (เบากว่านี้ = เงียบ)<span id="v1">-38 dB</span></label><input type="range" id="au-th" min="-60" max="-15" step="1" value="-38"></div>
+<div class="f"><label>เงียบนานอย่างน้อย<span id="v2">0.7 วิ</span></label><input type="range" id="au-ml" min="0.3" max="3" step="0.1" value="0.7"></div>
+<div class="f"><label>เว้นขอบไว้ไม่ให้หวบ<span id="v3">0.12 วิ</span></label><input type="range" id="au-pd" min="0" max="0.5" step="0.02" value="0.12"></div>
+<button id="au-go">🔄 วิเคราะห์ใหม่</button><button id="au-ap" class="rb" hidden>✂ ตัดช่วงที่ติ๊กออกทั้งหมด</button>
+<div class="sec">รายการช่วงที่จะตัด</div><div id="au-ls"></div></div></div>
+<div class="omp" id="omp" hidden><div class="plh"><i class="dot"></i><b>OME TV</b><span class="bdg" style="color:#f97316;border-color:#f9731666">แนวตั้ง 9:16</span><button id="om-x" title="ปิด">✕</button></div>
+<div class="plb"><p class="hint" style="margin:0 0 10px;line-height:1.6">จัดวิดีโอที่อัดหน้าจอ Ome TV เป็นแนวตั้ง<br>• <b>จอ Ome (ฝั่งซ้าย)</b> อยู่ข้างบน<br>• <b>กล้องของคุณ (ฝั่งขวา)</b> อยู่ข้างล่าง</p>
+<p id="om-st" class="hint" style="margin:0 0 8px"></p>
+<button id="om-yes" class="rb" style="margin-top:0">✅ ใช่ ใช้เลย</button><button id="om-off" style="width:100%;margin-top:6px">↩ คืนค่าเดิม</button>
+<div class="sec">ปรับให้ตรงกับหน้าจอที่อัด</div>
+<div class="f"><label>เส้นแบ่ง ซ้าย | ขวา<span id="om-v1">50%</span></label><input type="range" id="om-sp" min="30" max="70" step="0.5" value="50"></div>
+<div class="f"><label>ตัดขอบบนออก<span id="om-v2">0%</span></label><input type="range" id="om-tp" min="0" max="30" step="0.5" value="0"></div>
+<div class="f"><label>ตัดแถบปุ่มด้านล่างออก<span id="om-v3">26%</span></label><input type="range" id="om-bt" min="0" max="50" step="0.5" value="26"></div>
+<div class="f"><label>การเติมช่อง</label><select id="om-ft"><option value="cover">เต็มช่อง (ครอปขอบนิดหน่อย)</option><option value="contain">เห็นครบ (มีขอบดำ)</option></select></div>
+<label class="sg" style="margin-top:6px"><input type="checkbox" id="om-sw"><span>สลับ: กล้องเราอยู่ฝั่งซ้าย</span></label>
+<p class="hint" style="margin-top:10px">เลื่อนแถบแล้วดูผลที่ตัวเล่นได้ทันที · มีผลกับทุกคลิปวิดีโอใน Timeline (รวมคลิปที่ได้จากออโต้คัท)</p></div></div>
+<div class="ov" id="ove" hidden><div class="box"><h3 style="margin-top:0">กำลังส่งออกวิดีโอ…</h3><progress id="pg" max="1" value="0"></progress><p class="hint">ระบบอัดวิดีโอแบบเรียลไทม์ที่ความละเอียดและบิตเรตสูง กรุณาอย่าสลับแท็บหรือย่อหน้าต่างจนกว่าจะเสร็จ</p><button id="ec">ยกเลิก</button></div></div>
+
+<script>
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9);
+const cv=$('#cv'),cx=cv.getContext('2d');
+let P,M={},T=0,playing=false,sel=null,pps=80,undo=[],AC,dest,mon,exporting=false,cancelled=false,wall0=0,t0=0,db=null,drag=null,rec,chunks=[],dl=null;
+const newP=()=>({id:uid(),name:'โปรเจกต์ใหม่',w:1920,h:1080,media:[],clips:[],upd:Date.now()});
+/* ---------- storage (IndexedDB) ---------- */
+function idb(){return new Promise((res,rej)=>{try{const r=indexedDB.open('clipforge',1);r.onupgradeneeded=()=>{r.result.createObjectStore('projects',{keyPath:'id'});r.result.createObjectStore('media',{keyPath:'id'})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
+const tx=(st,mode,fn)=>new Promise((res,rej)=>{const t=db.transaction(st,mode);const r=fn(t.objectStore(st));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error)});
+let st;function dirty(){clearTimeout(st);$('#sv').textContent='กำลังบันทึก…';st=setTimeout(save,500)}
+async function save(){if(!db){$('#sv').textContent='เบราว์เซอร์ไม่รองรับการบันทึก';return}P.upd=Date.now();try{await tx('projects','readwrite',s=>s.put(JSON.parse(JSON.stringify(P))));$('#sv').textContent='บันทึกแล้ว ✓'}catch(e){$('#sv').textContent='บันทึกไม่สำเร็จ'}}
+/* ---------- media ---------- */
+const BL={};let SEG=[];
+function mk(id,blob,type){return new Promise(res=>{BL[id]=blob;const url=URL.createObjectURL(blob);let el;
+if(type==='image'){el=new Image();el.onload=()=>{M[id]={el,type,dur:5};res(M[id])};el.onerror=()=>res(null);el.src=url;return}
+el=document.createElement(type);el.preload='auto';el.playsInline=true;
+el.onloadedmetadata=()=>{M[id]={el,type,dur:isFinite(el.duration)?el.duration:1};if(AC)hook(M[id]);res(M[id])};el.onerror=()=>res(null);el.src=url})}
+function ensureAC(){if(AC)return;AC=new (window.AudioContext||window.webkitAudioContext)();dest=AC.createMediaStreamDestination();mon=AC.createGain();mon.connect(AC.destination);for(const k in M)hook(M[k])}
+function hook(m){if(m.type==='image'||m.g)return;const s=AC.createMediaElementSource(m.el);m.g=AC.createGain();s.connect(m.g);m.g.connect(mon);m.g.connect(dest)}
+async function addFiles(files){for(const f of files){const type=f.type.startsWith('video')?'video':f.type.startsWith('audio')?'audio':f.type.startsWith('image')?'image':null;if(!type)continue;const id=uid();const m=await mk(id,f,type);if(!m){alert('เปิดไฟล์ไม่ได้: '+f.name);continue}P.media.push({id,name:f.name,type,dur:m.dur});if(db)try{await tx('media','readwrite',s=>s.put({id,pid:P.id,blob:f}))}catch(e){}}libUI();dirty()}
+function libUI(){$('#lib').innerHTML=P.media.map(m=>`<div class="mi" data-id="${m.id}" style="${(M[m.id]&&M[m.id].th)?'background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('+M[m.id].th+');background-size:cover;background-position:center':''}">${thq({mid:m.id})}${m.type==='video'?'🎞':m.type==='audio'?'🎵':'🖼'}<span title="${esc(m.name)}">${esc(m.name)}</span><small>${m.dur.toFixed(1)}s</small></div>`).join('')||'<p class="hint">ยังไม่มีไฟล์</p>'}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ---------- project ---------- */
+async function loadP(p){pause();for(const k in M){try{M[k].el.pause();if(M[k].alt)M[k].alt.pause();URL.revokeObjectURL(M[k].el.src)}catch(e){}}M={};P=p;T=0;sel=null;undo=[];HOLD.ok=false;
+for(const m of P.media){try{const r=await tx('media','readonly',s=>s.get(m.id));if(r)await mk(m.id,r.blob,m.type)}catch(e){}}
+cv.width=P.w;cv.height=P.h;$('#as').value=P.w+'x'+P.h;$('#pn').value=P.name;libUI();drawTL();props()}
+async function projList(){const all=db?await tx('projects','readonly',s=>s.getAll()):[];all.sort((a,b)=>b.upd-a.upd);
+$('#pl').innerHTML=all.map(p=>`<div class="pr"><div><b>${esc(p.name)}</b><br><small class="hint">${new Date(p.upd).toLocaleString('th-TH')} • ${p.clips.length} คลิป</small></div><button data-o="${p.id}">เปิด</button><button data-d="${p.id}">ลบ</button></div>`).join('')||'<p class="hint">ยังไม่มีโปรเจกต์ที่บันทึกไว้</p>'}
+$('#bp').onclick=async()=>{await save();await projList();$('#ovp').hidden=false};$('#pc').onclick=()=>$('#ovp').hidden=true;
+$('#pnw').onclick=async()=>{await save();await loadP(newP());await save();$('#ovp').hidden=true};
+$('#pl').onclick=async e=>{const o=e.target.dataset.o,d=e.target.dataset.d;
+if(o){const p=await tx('projects','readonly',s=>s.get(o));await loadP(p);$('#ovp').hidden=true}
+if(d&&confirm('ลบโปรเจกต์นี้ถาวร?')){const p=await tx('projects','readonly',s=>s.get(d));for(const m of p.media)await tx('media','readwrite',s=>s.delete(m.id));await tx('projects','readwrite',s=>s.delete(d));if(d===P.id)await loadP(newP());projList()}};
+$('#bs').onclick=save;$('#pn').oninput=e=>{P.name=e.target.value||'โปรเจกต์';dirty()};
+$('#as').onchange=e=>{const[w,h]=e.target.value.split('x').map(Number);P.w=w;P.h=h;cv.width=w;cv.height=h;dirty()};
+/* ---------- editing ---------- */
+const total=()=>Math.max(1,...P.clips.map(k=>k.start+k.dur));
+const snap=()=>{undo.push(JSON.stringify(P.clips));if(undo.length>60)undo.shift()};
+const all=()=>{drawTL();props();dirty()};
+function addClip(mid){snap();const m=P.media.find(x=>x.id===mid),tr=m.type==='audio'?'a':'v';const end=Math.max(0,...P.clips.filter(c=>c.track===tr).map(c=>c.start+c.dur));
+const c={id:uid(),mid,track:tr,start:end,in:0,dur:m.dur,speed:1,vol:1,br:100,ct:100,sa:100};P.clips.push(c);sel=c.id;all()}
+$('#lib').onclick=e=>{const i=e.target.closest('.mi');if(i)addClip(i.dataset.id)};
+$('#bi').onclick=()=>{ensureAC();$('#fi').click()};$('#fi').onchange=e=>{addFiles([...e.target.files]);e.target.value=''};
+$('#btx').onclick=()=>{snap();const c={id:uid(),track:'t',start:T,dur:3,text:'ข้อความของคุณ',size:90,color:'#ffffff',x:50,y:82};P.clips.push(c);sel=c.id;all()};
+const cur=()=>P.clips.find(c=>c.id===sel);
+$('#bde').onclick=del;function del(){if(!sel)return;snap();P.clips=P.clips.filter(c=>c.id!==sel);sel=null;all()}
+$('#bdu').onclick=()=>{const k=cur();if(!k)return;snap();const n={...k,id:uid(),start:k.start+k.dur};P.clips.push(n);sel=n.id;all()};
+$('#bsp').onclick=split;function split(){let k=cur();if(!k||T<=k.start+.05||T>=k.start+k.dur-.05)k=P.clips.find(c=>c.track!=='t'&&T>c.start+.05&&T<c.start+c.dur-.05);if(!k)return;snap();const n={...k,id:uid(),start:T,in:k.in+(T-k.start)*k.speed,dur:k.start+k.dur-T};k.dur=T-k.start;P.clips.push(n);sel=n.id;all()}
+$('#bun').onclick=undoDo;function undoDo(){const s=undo.pop();if(s){P.clips=JSON.parse(s);sel=null;all()}}
+$('#zm').oninput=e=>{pps=+e.target.value;drawTL()};
+/* ---------- properties ---------- */
+let ptab='';const DEF={sc:100,px:0,py:0,rot:0,op:100,speed:1,vol:1,br:100,ct:100,sa:100},gv=(k,key)=>k[key]??DEF[key];
+function props(){const k=cur(),el=$('#pp'),dh=$('#dh');
+if(!k){dh.className='phd';dh.textContent='รายละเอียด';const kv=(a,b)=>`<div class="kv"><span>${a}</span><b>${b}</b></div>`;el.innerHTML=kv('ชื่อ',esc(P.name))+kv('ความละเอียด',P.w+'×'+P.h)+kv('อัตราเฟรม','30 fps')+kv('จำนวนคลิป',P.clips.length)+kv('ความยาวรวม',fmt(P.clips.length?total():0))+'<p class="hint" style="margin-top:12px">คลิกคลิปบน Timeline เพื่อแก้ไข</p>';return}
+const m=M[k.mid],isV=k.track==='v',isT=k.track==='t',med=!isT&&m&&m.type!=='image';
+const tabs=isT?[['t','ข้อความ'],['p','ตำแหน่ง']]:[...(isV?[['v','วิดีโอ']]:[]),...(med?[['a','ระบบเสียง'],['s','ความเร็ว']]:[]),...(isV?[['c','ปรับแต่ง']]:[])];
+if(!tabs.some(t=>t[0]===ptab))ptab=tabs[0][0];
+dh.className='phd ptabs';dh.innerHTML=tabs.map(t=>`<button class="ptb${t[0]===ptab?' on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+const R=(l,key,a,b,st,u)=>{const v=gv(k,key);return `<div class="rw"><span>${l}</span><input type="range" data-k="${key}" min="${a}" max="${b}" step="${st}" value="${v}"><input type="number" class="nb" data-k="${key}" min="${a}" max="${b}" step="${st}" value="${+(+v).toFixed(2)}"><em>${u||''}</em></div>`};
+let h='';
+if(ptab==='v')h='<div class="sh">การแปลง <button data-reset="1" title="รีเซ็ต">↺</button></div>'+R('ปรับขนาด','sc',10,300,1,'%')+R('ตำแหน่ง X','px',-100,100,1,'%')+R('ตำแหน่ง Y','py',-100,100,1,'%')+R('หมุน','rot',-180,180,1,'°')+R('ความทึบ','op',0,100,1,'%');
+else if(ptab==='a')h='<div class="sh">เสียง</div>'+R('ระดับเสียง','vol',0,2,.05,'×');
+else if(ptab==='s')h='<div class="sh">ความเร็ว</div>'+R('ความเร็ว','speed',.25,4,.05,'×');
+else if(ptab==='c')h='<div class="sh">ปรับแต่งสี</div>'+R('ความสว่าง','br',20,200,1,'%')+R('คอนทราสต์','ct',20,200,1,'%')+R('ความสดสี','sa',0,300,1,'%');
+else if(ptab==='t')h='<div class="sh">ข้อความ</div><textarea rows="3" data-k="text" data-s="1">'+esc(k.text)+'</textarea>'+R('ขนาด','size',20,300,1,'')+'<div class="rw"><span>สี</span><input type="color" data-k="color" data-s="1" value="'+k.color+'"></div>';
+else h='<div class="sh">ตำแหน่ง</div>'+R('แนวนอน','x',0,100,1,'%')+R('แนวตั้ง','y',0,100,1,'%');
+el.innerHTML=h}
+$('#pp').addEventListener('focusin',snap);
+$('#dh').onclick=e=>{const t=e.target.dataset.t;if(t){ptab=t;props()}};
+$('#pp').onclick=e=>{if(e.target.dataset.reset){const k=cur();if(!k)return;snap();Object.assign(k,{sc:100,px:0,py:0,rot:0,op:100});props();dirty()}};
+$('#pp').oninput=e=>{const k=cur(),key=e.target.dataset.k;if(!k||!key)return;const tx=!!e.target.dataset.s;if(!tx&&(e.target.value===''||isNaN(+e.target.value)))return;const v=tx?e.target.value:+e.target.value;
+if(key==='speed')k.dur=k.dur*k.speed/v;k[key]=v;e.target.parentNode.querySelectorAll('[data-k="'+key+'"]').forEach(i=>{if(i!==e.target)i.value=v});drawTL();dirty()};
+/* ---------- timeline ---------- */
+function drawTL(){const tl=$('#tl'),tt=total(),W=(tt+10)*pps;tl.style.width=W+'px';let h='<div class="rul">';const step=pps<50?5:pps<110?2:1;for(let s=0;s<tt+10;s+=step)h+=`<i style="left:${s*pps}px">${s}s</i>`;h+='</div>';
+for(const tr of['v','a','t']){h+=`<div class="row">`;for(const k of P.clips.filter(c=>c.track===tr)){const nm=tr==='t'?'🔤 '+k.text:(P.media.find(m=>m.id===k.mid)||{}).name;h+=`<div class="clip ${tr}${k.id===sel?' sel':''}${(M[k.mid]&&M[k.mid].th)?' th_'+k.mid:''}" data-id="${k.id}" style="left:${k.start*pps}px;width:${Math.max(8,k.dur*pps)}px">${thq(k)}<b class="l" data-h="l"></b>${esc(nm||'')}<small style="opacity:.85;margin-left:6px">${k.dur.toFixed(1)}s</small>${k.speed&&k.speed!==1?' ×'+k.speed.toFixed(2):''}<b class="rr" data-h="r"></b></div>`}h+='</div>'}
+tl.innerHTML=h+mks()+'<div id="ph"></div>'+(P.clips.length?'':'<div class="emp">ลากเนื้อหามาที่นี่ เพื่อเริ่มสร้างไทม์ไลน์เลย</div>');ph()}
+function ph(){const p=$('#ph');if(!p)return;p.style.left=T*pps+'px';const tt=total();$('#tm').textContent=fmt(T)+' / '+fmt(tt);const w=$('#tw');if(playing&&T*pps>w.scrollLeft+w.clientWidth-40)w.scrollLeft=T*pps-40;if(exporting)$('#pg').value=T/tt}
+const fmt=s=>Math.floor(s/60)+':'+(s%60).toFixed(1).padStart(4,'0');
+const tlx=e=>Math.max(0,(e.clientX-$('#tl').getBoundingClientRect().left)/pps);
+$('#tl').onpointerdown=e=>{const ce=e.target.closest('.clip');
+if(!ce){drag={mode:'seek'};T=tlx(e);return}
+const k=P.clips.find(c=>c.id===ce.dataset.id);if(sel!==k.id){sel=k.id;props()}snap();drag={k,o:{...k},mode:e.target.dataset.h||'m',sx:e.clientX};drawTL()};
+addEventListener('pointermove',e=>{if(!drag)return;if(drag.mode==='seek'){T=tlx(e);return}const{k,o,mode}=drag,d=(e.clientX-drag.sx)/pps,md=(M[k.mid]||{dur:1e9}).dur;
+if(mode==='m'){let s=Math.max(0,o.start+d);for(const c of P.clips){if(c===k)continue;for(const edge of[c.start,c.start+c.dur]){if(Math.abs(s-edge)*pps<8)s=edge;else if(Math.abs(s+k.dur-edge)*pps<8)s=edge-k.dur}}k.start=Math.max(0,s)}
+else if(mode==='l'){let dd=Math.min(d,o.dur-.1);dd=Math.max(dd,-o.start,-o.in/o.speed);k.start=o.start+dd;k.in=o.in+dd*o.speed;k.dur=o.dur-dd}
+else{let nd=Math.max(.1,o.dur+d);if(k.track!=='t'&&M[k.mid]&&M[k.mid].type!=='image')nd=Math.min(nd,(md-o.in)/o.speed);k.dur=nd}
+drawTL()});
+addEventListener('pointerup',()=>{if(drag&&drag.k)dirty();drag=null});
+/* ---------- render & playback ---------- */
+/* เก็บเฟรมล่าสุดไว้ใช้ตอนวิดีโอกำลังกระโดด (seek) ข้ามช่วงที่ตัด -> ไม่เกิดจอดำ */
+const HOLD={c:document.createElement('canvas'),ok:false,t:-1};
+function vready(m){const e=m.el;return !!(e.videoWidth||e.naturalWidth)&&!(m.type==='video'&&e.readyState<2)}
+function holdSave(){const c=cv,sc=exporting?1:.5,hw=Math.max(2,Math.round(c.width*sc)),hh=Math.max(2,Math.round(c.height*sc));if(HOLD.c.width!==hw||HOLD.c.height!==hh){HOLD.c.width=hw;HOLD.c.height=hh}HOLD.c.getContext('2d').drawImage(c,0,0,hw,hh);HOLD.ok=true;HOLD.t=T}
+function drawOme(k,e,w,h){const o=P.ome,c=cv,W=c.width,hh=c.height/2,sp=o.split/100,ty=h*o.top/100,sh=Math.max(8,h*(1-(o.top+o.bot)/100));
+const A=[0,ty,w*sp,sh],B=[w*sp,ty,w*(1-sp),sh],S=o.swap?[B,A]:[A,B];
+S.forEach((r,i)=>{const dy=i*hh;cx.save();cx.beginPath();cx.rect(0,dy,W,hh);cx.clip();cx.globalAlpha=(k.op??100)/100;cx.filter=`brightness(${k.br??100}%) contrast(${k.ct??100}%) saturate(${k.sa??100}%)`;
+const z=o.fit==='contain'?Math.min(W/r[2],hh/r[3]):Math.max(W/r[2],hh/r[3]),dw=r[2]*z,dh=r[3]*z;cx.drawImage(e,r[0],r[1],r[2],r[3],(W-dw)/2,dy+(hh-dh)/2,dw,dh);cx.restore()})}
+function render(){const c=cv;cx.filter='none';cx.globalAlpha=1;cx.fillStyle='#000';cx.fillRect(0,0,c.width,c.height);
+const act=P.clips.filter(k=>k.track==='v'&&T>=k.start&&T<k.start+k.dur&&M[k.mid]);
+const miss=act.some(k=>!vready(M[k.mid]));
+if(miss&&HOLD.ok)cx.drawImage(HOLD.c,0,0,c.width,c.height);
+for(const k of act){const m=M[k.mid];if(!vready(m))continue;const e=m.el,w=e.videoWidth||e.naturalWidth,h=e.videoHeight||e.naturalHeight;
+if(P.ome&&P.ome.on&&m.type==='video'){drawOme(k,e,w,h);continue}
+const s=Math.min(c.width/w,c.height/h);const z=(k.sc??100)/100;cx.save();cx.globalAlpha=(k.op??100)/100;cx.filter=`brightness(${k.br}%) contrast(${k.ct}%) saturate(${k.sa}%)`;cx.translate(c.width/2+(k.px||0)/100*c.width,c.height/2+(k.py||0)/100*c.height);cx.rotate((k.rot||0)*Math.PI/180);cx.drawImage(e,-w*s*z/2,-h*s*z/2,w*s*z,h*s*z);cx.restore()}
+if(act.length&&!miss&&(playing||exporting||HOLD.t!==T))holdSave();
+cx.filter='none';cx.textAlign='center';cx.textBaseline='middle';cx.lineJoin='round';
+for(const k of P.clips){if(k.track!=='t'||T<k.start||T>=k.start+k.dur)continue;const fs=k.size*c.height/1080;cx.font=`700 ${fs}px Sarabun,sans-serif`;cx.lineWidth=fs/8;cx.strokeStyle='rgba(0,0,0,.85)';cx.fillStyle=k.color;const L=String(k.text).split('\n');L.forEach((t,i)=>{const y=c.height*k.y/100+(i-(L.length-1)/2)*fs*1.2;cx.strokeText(t,c.width*k.x/100,y);cx.fillText(t,c.width*k.x/100,y)})}}
+/* กันกระตุกตอนข้ามจุดตัด: ใช้วิดีโอ 2 ตัวต่อ 1 ไฟล์ ตัวสำรองเตรียม seek ไปรอที่คลิปถัดไปล่วงหน้า พอถึงจุดตัดก็สลับตัวเล่นทันที (ไม่ต้อง seek ตอนนั้น) */
+function getAlt(m){if(m.alt)return m.alt;const a=document.createElement(m.type);a.preload='auto';a.playsInline=true;a.src=m.el.src;m.alt=a;
+if(AC){try{const s=AC.createMediaElementSource(a);m.galt=AC.createGain();s.connect(m.galt);m.galt.connect(mon);m.galt.connect(dest)}catch(e){}}return a}
+function prep(id,m,k){let n=null;for(const c of P.clips)if(c.mid===id&&c.track!=='t'&&c.start>T+.001&&(!n||c.start<n.start))n=c;
+if(!n||n.start-T>3)return;
+if(k&&n.speed===k.speed&&Math.abs(k.in+(n.start-k.start)*k.speed-n.in)<.05)return;/* ต่อเนื่องในไฟล์ต้นทางอยู่แล้ว ไม่ต้องเตรียม */
+if(m.altFor===n.id)return;const a=getAlt(m);m.altFor=n.id;a.pause();a.playbackRate=Math.min(16,Math.max(.0625,n.speed));a.currentTime=n.in}
+function sync(){for(const id in M){const m=M[id];if(m.type==='image')continue;const k=P.clips.find(k=>k.mid===id&&k.track!=='t'&&T>=k.start&&T<k.start+k.dur);let e=m.el;
+if(!k){m.lk=null;if(!e.paused)e.pause();if(playing)prep(id,m,null);continue}
+const want=k.in+(T-k.start)*k.speed;
+if(playing){let jump=m.lk!==k.id,swapped=false;
+if(jump&&m.altFor===k.id&&m.alt&&m.alt.readyState>=2&&!m.alt.seeking){e.pause();const o=m.el;m.el=m.alt;m.alt=o;if(m.galt&&m.g){const g=m.g;m.g=m.galt;m.galt=g}e=m.el;m.altFor=null;swapped=true;jump=false}
+if(m.g)m.g.gain.value=k.vol;e.playbackRate=Math.min(16,Math.max(.0625,k.speed));
+if(swapped){if(Math.abs(e.currentTime-want)>.3)e.currentTime=want;e.play().catch(()=>{})}
+else if(e.paused){e.currentTime=want;e.play().catch(()=>{})}else if(Math.abs(e.currentTime-want)>(jump?.04:.3))e.currentTime=want;
+m.lk=k.id;prep(id,m,k)}
+else{if(m.g)m.g.gain.value=k.vol;e.playbackRate=Math.min(16,Math.max(.0625,k.speed));m.lk=k.id;if(!e.paused)e.pause();if(Math.abs(want-(m.lw??-9))>.001){m.lw=want;e.currentTime=want}}}}
+function play(){ensureAC();AC.resume();if(T>=total()-.05)T=0;for(const id in M){M[id].altFor=null;M[id].lw=null}playing=true;t0=T;wall0=performance.now();$('#bpl').textContent='⏸ หยุด'}
+function pause(){playing=false;$('#bpl').textContent='▶ เล่น'}
+$('#bpl').onclick=()=>playing?pause():play();
+let stallN=0;function stallChk(){const bad=P.clips.some(k=>{if(k.track!=='v'||T<k.start||T>=k.start+k.dur)return false;const m=M[k.mid];return m&&m.type==='video'&&(m.el.seeking||m.el.readyState<2)});if(!bad){stallN=0;return false}return ++stallN<=90}
+function loop(now){if(drag&&drag.mode==='seek'&&playing)pause();if(playing){if(exporting&&stallChk()){t0=T;wall0=now}else{T=t0+(now-wall0)/1000;if(T>=total()){T=total();if(exporting)finish();else pause()}}}try{sync();render();ph()}catch(err){console.error(err);const v=$('#sv');if(v)v.textContent='⚠ error: '+(err&&err.message||err)}requestAnimationFrame(loop)}
+addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+if(e.code==='Space'){e.preventDefault();playing?pause():play()}else if(e.ctrlKey||e.metaKey||e.altKey){}else if(e.key==='s'||e.key==='S')split();else if(e.key==='d'||e.key==='D'||e.key==='Delete'||e.key==='Backspace')del();else if(e.key==='a'||e.key==='A')trimB();else if(e.key==='q'||e.key==='Q')trimA();else if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undoDo()}});
+/* ---------- export ---------- */
+$('#be').onclick=async()=>{if(!P.clips.some(k=>k.track!=='t'))return alert('ยังไม่มีคลิปให้ส่งออก');if(!dl&&typeof claude!=='undefined')dl=await claude.use('downloads').catch(()=>null);
+pause();ensureAC();await AC.resume();mon.gain.value=0;exporting=true;cancelled=false;$('#ove').hidden=false;
+const fps=30,stream=cv.captureStream(fps);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+const types=['video/mp4;codecs=avc1,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'],mt=types.find(t=>MediaRecorder.isTypeSupported(t));
+rec=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:Math.round(P.w*P.h*fps*.3),audioBitsPerSecond:192000});chunks=[];
+rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+rec.onstop=async()=>{exporting=false;mon.gain.value=1;$('#ove').hidden=true;if(cancelled)return;const ext=mt.includes('mp4')?'mp4':'webm',b=new Blob(chunks,{type:mt.split(';')[0]}),name=(P.name||'video')+'.'+ext;
+if(dl){try{await dl.save({filename:name,data:b})}catch(e){if(e.code!=='declined')alert('บันทึกไฟล์ไม่สำเร็จ: '+(e.message||e.code))}}
+else{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click()}};
+T=0;sync();await new Promise(r=>setTimeout(r,600));rec.start(1000);play()};
+function finish(){pause();setTimeout(()=>rec.state!=='inactive'&&rec.stop(),300)}
+$('#ec').onclick=()=>{cancelled=true;pause();if(rec&&rec.state!=='inactive')rec.stop()};
+/* ---------- ลบหน้า / ลบหลัง ---------- */
+function tgt(){let k=cur();if(!k||T<=k.start||T>=k.start+k.dur)k=P.clips.find(c=>c.track!=='t'&&T>c.start&&T<c.start+c.dur)||P.clips.find(c=>T>c.start&&T<c.start+c.dur);return k}
+function rip(k,oe,r){if(k.track==='t')return;for(const c of P.clips)if(c!==k&&c.track===k.track&&c.start>=oe-.001)c.start-=r}
+function trimB(){const k=tgt();if(!k)return;snap();const r=T-k.start,oe=k.start+k.dur;k.in+=r*k.speed;k.dur-=r;rip(k,oe,r);sel=k.id;T=k.start;all()}
+function trimA(){const k=tgt();if(!k)return;snap();const oe=k.start+k.dur,r=oe-T;k.dur=T-k.start;rip(k,oe,r);sel=k.id;all()}
+$('#bdb').onclick=trimB;$('#bda').onclick=trimA;
+/* ---------- ปลั๊กอิน: ออโต้คัท ---------- */
+const mks=()=>SEG.filter(s=>s.on).map(s=>{const k=P.clips.find(c=>c.id===s.cid);if(!k)return'';const a=k.start+(s.s-k.in)/k.speed,b=k.start+(s.e-k.in)/k.speed;return `<div class="mk" style="left:${a*pps}px;width:${Math.max(3,(b-a)*pps)}px;top:${22+(k.track==='a'?44:0)}px;height:44px"></div>`}).join('');
+$('#bau').onclick=()=>$('#plg').hidden=!$('#plg').hidden;$('#au-x').onclick=()=>{$('#plg').hidden=true};
+async function analyze(){const th=+$('#au-th').value,minL=+$('#au-ml').value,pad=+$('#au-pd').value;SEG=[];ensureAC();$('#au-st').textContent='กำลังวิเคราะห์เสียง… (ไฟล์ยาวอาจใช้เวลาสักครู่)';$('#au-ls').innerHTML='';const cache={};
+for(const k of P.clips){if(k.track==='t')continue;const m=M[k.mid];if(!m||m.type==='image')continue;
+try{if(!cache[k.mid])cache[k.mid]=await AC.decodeAudioData(await BL[k.mid].arrayBuffer())}catch(e){continue}
+const buf=cache[k.mid],sr=buf.sampleRate,d=buf.getChannelData(0),w=Math.floor(sr*.02),i0=Math.floor(k.in*sr),se=k.in+k.dur*k.speed,i1=Math.min(d.length,Math.floor(se*sr));let run=null;
+const push=(a,b)=>{if(b-a>=minL){const s=a+pad,e=b-pad;if(e-s>.05)SEG.push({cid:k.id,s,e,on:true})}};
+for(let i=i0;i+w<=i1;i+=w){let sum=0;for(let j=i;j<i+w;j++)sum+=d[j]*d[j];const db=10*Math.log10(sum/w+1e-12),t=i/sr;if(db<th){if(run===null)run=t}else if(run!==null){push(run,t);run=null}}
+if(run!==null)push(run,se)}
+auUI(true)}
+function auUI(done){let tot=0,h='';SEG.forEach((s,i)=>{const k=P.clips.find(c=>c.id===s.cid);if(!k)return;const a=k.start+(s.s-k.in)/k.speed,b=k.start+(s.e-k.in)/k.speed;if(s.on)tot+=b-a;h+=`<label class="sg"><input type="checkbox" data-i="${i}" ${s.on?'checked':''}><span data-go="${a}">${fmt(a)} → ${fmt(b)}</span><small>${(b-a).toFixed(1)} วิ</small></label>`});
+$('#au-ls').innerHTML=h||(done?'<p class="hint">ไม่พบช่วงเงียบ ลองเพิ่มความไว หรือลดเวลาเงียบขั้นต่ำ</p>':'');$('#au-ap').hidden=!SEG.length;
+$('#au-st').textContent=SEG.length?`พบ ${SEG.length} ช่วง ตัดแล้วสั้นลงประมาณ ${tot.toFixed(1)} วินาที (คลิกเวลาเพื่อไปดูจุดนั้น)`:'';drawTL()}
+$('#au-go').onclick=()=>{if(!P.clips.some(k=>k.track!=='t'))return alert('ใส่คลิปลง Timeline ก่อน');analyze()};
+$('#plg').oninput=e=>{const id=e.target.id;if(id==='au-th')$('#v1').textContent=e.target.value+' dB';if(id==='au-ml')$('#v2').textContent=e.target.value+' วิ';if(id==='au-pd')$('#v3').textContent=e.target.value+' วิ';if(e.target.dataset.i!==undefined){SEG[+e.target.dataset.i].on=e.target.checked;auUI()}};
+$('#plg').onclick=e=>{const g=e.target.dataset.go;if(g!==undefined){pause();T=+g;const w=$('#tw');w.scrollLeft=Math.max(0,T*pps-80)}};
+$('#au-ap').onclick=()=>{const on=SEG.filter(s=>s.on);if(!on.length)return;snap();pause();
+const ks=[...new Set(on.map(s=>s.cid))].map(id=>P.clips.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>b.start-a.start);
+for(const k of ks){const se=k.in+k.dur*k.speed,cuts=on.filter(s=>s.cid===k.id).map(s=>[Math.max(s.s,k.in),Math.min(s.e,se)]).filter(c=>c[1]-c[0]>.01).sort((a,b)=>a[0]-b[0]);
+const keep=[];let p=k.in;for(const[a,b]of cuts){if(a>p)keep.push([p,a]);p=Math.max(p,b)}if(p<se-.01)keep.push([p,se]);
+const oe=k.start+k.dur;let pos=k.start;const pcs=keep.map(([a,b])=>{const n={...k,id:uid(),in:a,start:pos,dur:(b-a)/k.speed};pos+=n.dur;return n});
+P.clips=P.clips.filter(c=>c!==k);for(const c of P.clips)if(c.track===k.track&&c.start>=oe-.001)c.start-=oe-pos;P.clips.push(...pcs)}
+const saved=on.reduce((a,s)=>a+(s.e-s.s),0);SEG=[];sel=null;T=0;$('#au-ls').innerHTML='';$('#au-ap').hidden=true;$('#au-st').textContent='ตัดเรียบร้อย ✓ สั้นลงประมาณ '+saved.toFixed(1)+' วินาที (กด ↶ ย้อนกลับได้)';all()};
+
+/* ---------- UI ใหม่: แท็บ / ข้อความสำเร็จรูป / ลากวางไฟล์ ---------- */
+document.querySelectorAll('.tab[data-p]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab[data-p]').forEach(x=>x.classList.toggle('on',x===b));$('#pane-media').hidden=b.dataset.p!=='media';$('#pane-text').hidden=b.dataset.p!=='text'});
+document.querySelectorAll('.tp').forEach(b=>b.onclick=()=>{snap();const c={id:uid(),track:'t',start:T,dur:3,text:b.dataset.t,size:+b.dataset.s,color:b.dataset.c,x:50,y:+b.dataset.y};P.clips.push(c);sel=c.id;all()});
+addEventListener('dragover',e=>e.preventDefault());addEventListener('drop',e=>{e.preventDefault();ensureAC();addFiles([...e.dataTransfer.files])});
+/* ---------- ปลั๊กอินออโต้คัท (เต็มจอ) ---------- */
+const DEC={};let WV=[];
+$('#bau').onclick=()=>{if(!$('#plg').hidden){plClose();return}pause();$('#plg').hidden=false;document.body.classList.add('pl-open');if(P.clips.some(k=>k.track!=='t'))analyze(true);else{WV=[];SEG=[];auUI(true);wave();$('#au-st').textContent='ใส่คลิปลง Timeline ก่อน'}};
+/* วิเคราะห์เสียงแบบไม่บล็อกหน้าเว็บ: ถอดรหัสที่ sample rate ต่ำ (ประหยัดแรม) + คืนเวลาให้ UI เป็นช่วง ๆ + กันเรียกซ้อน */
+const yieldUI=()=>new Promise(r=>setTimeout(r,0));
+let DCX=null,anBusy=false,anRe=false,anAuto=false,segRaf=0;
+function decCtx(){if(DCX)return DCX;for(const sr of[8000,16000,22050]){try{DCX=new OfflineAudioContext(1,1,sr);return DCX}catch(e){}}DCX=AC;return DCX}
+async function envOf(mid){const buf=await decCtx().decodeAudioData(await BL[mid].arrayBuffer());
+const sr=buf.sampleRate,w=Math.max(1,Math.round(sr*.02)),n=Math.floor(buf.length/w),db=new Float32Array(n),ch=[];
+for(let c=0;c<buf.numberOfChannels;c++)ch.push(buf.getChannelData(c));
+for(let i=0;i<n;i++){let q=0;const s0=i*w,s1=s0+w;for(const d of ch){let z=0;for(let j=s0;j<s1;j++)z+=d[j]*d[j];if(z>q)q=z}db[i]=10*Math.log10(q/w+1e-12);if(i%3000===2999)await yieldUI()}
+return db}
+function schedSeg(){if(segRaf)return;segRaf=requestAnimationFrame(()=>{segRaf=0;seg()})}
+async function analyze(auto){if(auto)anAuto=true;if(anBusy){anRe=true;return}anBusy=true;
+try{do{anRe=false;const a=anAuto;anAuto=false;await analyzeRun(a)}while(anRe)}
+catch(e){console.error(e);$('#au-st').textContent='⚠ วิเคราะห์ไม่สำเร็จ: '+(e&&e.message||e)}
+finally{anBusy=false;$('#au-go').disabled=false}}
+async function analyzeRun(auto){ensureAC();WV=[];SEG=[];auUI(false);wave();const st=$('#au-st');$('#au-go').disabled=true;
+const mids=[...new Set(P.clips.filter(k=>k.track!=='t'&&M[k.mid]&&M[k.mid].type!=='image').map(k=>k.mid))].filter(id=>DEC[id]===undefined);
+let n=0;for(const id of mids){st.textContent='กำลังวิเคราะห์เสียง… ('+(++n)+'/'+mids.length+') ไฟล์ยาวอาจใช้เวลาสักครู่';await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,20)));
+try{DEC[id]=await envOf(id)}catch(e){console.warn('decode fail',e);DEC[id]=null}}
+for(const k of P.clips){if(k.track==='t')continue;const m=M[k.mid];if(!m||m.type==='image'||!DEC[k.mid])continue;WV.push({cid:k.id,mid:k.mid})}
+if(!WV.length){auUI(true);wave();st.textContent=P.clips.some(k=>k.track!=='t')?'อ่านเสียงจากคลิปไม่ได้ (ไฟล์อาจไม่มีเสียง)':'ใส่คลิปลง Timeline ก่อน';return}
+st.textContent='';if(auto)autoTh();seg()}
+/* ตั้งความไวอัตโนมัติจากระดับเสียงจริงของคลิป: พื้นเสียงเบา→เสียงพูดดัง แล้วเลือกจุดตัดที่ ~30% */
+function autoTh(){const a=[];for(const w of WV){const d=DEC[w.mid];if(d)for(let i=0;i<d.length;i+=2)a.push(d[i])}if(a.length<20)return;a.sort((x,y)=>x-y);const q=f=>a[Math.floor(a.length*f)],lo=q(.1),hi=q(.9);
+let th=Math.round(lo+(hi-lo)*.3);th=Math.max(-60,Math.min(-15,th));$('#au-th').value=th;$('#v1').textContent=th+' dB'}
+function seg(){const th=+$('#au-th').value,minL=+$('#au-ml').value,pad=+$('#au-pd').value;SEG=[];
+for(const w of WV){const k=P.clips.find(c=>c.id===w.cid),db=DEC[w.mid];if(!k||!db)continue;const se=k.in+k.dur*k.speed,i0=Math.floor(k.in/.02),i1=Math.min(db.length,Math.floor(se/.02));let run=null;
+const push=(a,b)=>{if(b-a>=minL){const s=a+pad,e=b-pad;if(e-s>.05)SEG.push({cid:k.id,s,e,on:true})}};
+for(let i=i0;i<i1;i++){const t=i*.02;if(db[i]<th){if(run===null)run=t}else if(run!==null){push(run,t);run=null}}
+if(run!==null)push(run,se)}
+auUI(true);wave()}
+function wave(){const c=$('#au-wv');if(!c.clientWidth)return;const W=c.width=c.clientWidth,H=c.height=c.clientHeight,x=c.getContext('2d'),tt=total(),th=+$('#au-th').value,L=v=>Math.max(0,Math.min(1,(v+60)/60))*H*.45;
+x.fillStyle='#1a1a1a';x.fillRect(0,0,W,H);const stp=tt>120?30:tt>40?10:tt>12?2:1;x.font='11px sans-serif';for(let s=0;s<=tt;s+=stp){const px=s/tt*W;x.fillStyle='#262626';x.fillRect(px,0,1,H);x.fillStyle='#777';x.fillText(fmt(s),px+3,12)}
+const mx=new Float32Array(W).fill(-200);
+for(const w of WV){const k=P.clips.find(c=>c.id===w.cid),db=DEC[w.mid];if(!k||!db)continue;const se=k.in+k.dur*k.speed,i0=Math.floor(k.in/.02),i1=Math.min(db.length,Math.floor(se/.02));
+for(let i=i0;i<i1;i++){const a=Math.floor((k.start+(i*.02-k.in)/k.speed)/tt*W),b=Math.max(a+1,Math.floor(a+W/tt*.02/k.speed));for(let p=Math.max(0,a);p<b&&p<W;p++)if(db[i]>mx[p])mx[p]=db[i]}}
+for(let p=0;p<W;p++){const v=mx[p];if(v<-199)continue;const h=Math.max(1,L(v));x.fillStyle=v<th?'#6b3a46':'#19d3e3';x.fillRect(p,H/2-h,1,h*2)}
+for(const s of SEG){if(!s.on)continue;const k=P.clips.find(c=>c.id===s.cid);if(!k)continue;const a=(k.start+(s.s-k.in)/k.speed)/tt*W,b=(k.start+(s.e-k.in)/k.speed)/tt*W;x.fillStyle='rgba(244,63,94,.3)';x.fillRect(a,0,Math.max(2,b-a),H);x.fillStyle='#f43f5e';x.fillRect(a,0,2,H);x.fillRect(b-1,0,2,H)}
+x.strokeStyle='#ffe14d';x.setLineDash([5,4]);for(const y of[H/2-L(th),H/2+L(th)]){x.beginPath();x.moveTo(0,y);x.lineTo(W,y);x.stroke()}x.setLineDash([])}
+$('#au-wv').onclick=e=>{T=e.offsetX/e.target.clientWidth*total();pause()};
+addEventListener('resize',()=>{if(!$('#plg').hidden)wave()});
+$('#plg').oninput=e=>{const id=e.target.id;if(id==='au-th')$('#v1').textContent=e.target.value+' dB';if(id==='au-ml')$('#v2').textContent=e.target.value+' วิ';if(id==='au-pd')$('#v3').textContent=e.target.value+' วิ';
+if(['au-th','au-ml','au-pd'].includes(id))schedSeg();else if(e.target.dataset.i!==undefined){SEG[+e.target.dataset.i].on=e.target.checked;auUI();wave()}};
+$('#au-ap').addEventListener('click',()=>{setTimeout(analyze,60)});
+
+/* ---------- thumbnail / ปลั๊กอินแผงขวา ---------- */
+/* รูปตัวอย่างคลิปใส่ผ่าน CSS class (ไม่ฝัง data-URL ซ้ำในทุกคลิป) -> Timeline เบาลงมากหลังตัดเป็นร้อยท่อน */
+const thSt=document.createElement('style');document.head.appendChild(thSt);
+function thCss(){thSt.textContent=Object.keys(M).filter(i=>M[i].th).map(i=>`.clip.th_${i}{background-image:url('${M[i].th}')}`).join('')}
+function thq(k){const m=M[k.mid];if(m&&m.th===undefined&&m.type!=='audio'){m.th=null;mkThumb(k.mid)}return''}
+function mkThumb(id){const m=M[id],b=BL[id];if(!b)return;if(m.type==='image'){m.th=m.el.src;thCss();libUI();drawTL();return}
+const v=document.createElement('video');v.muted=true;v.preload='auto';v.src=URL.createObjectURL(b);v.onloadeddata=()=>{v.currentTime=Math.min(1,(v.duration||2)/2)};
+v.onseeked=()=>{try{const c=document.createElement('canvas');c.height=72;c.width=Math.round(72*(v.videoWidth/v.videoHeight||1.78));c.getContext('2d').drawImage(v,0,0,c.width,c.height);m.th=c.toDataURL('image/jpeg',.6);thCss();libUI();drawTL()}catch(e){}URL.revokeObjectURL(v.src)}}
+function plClose(){$('#plg').hidden=true;document.body.classList.remove('pl-open')}
+$('#au-x').onclick=plClose;
+function auUI(done){let tot=0,h='',n=0;SEG.forEach((s,i)=>{const k=P.clips.find(c=>c.id===s.cid);if(!k)return;const a=k.start+(s.s-k.in)/k.speed,b=k.start+(s.e-k.in)/k.speed;if(s.on){tot+=b-a;n++}if(i<400)h+=`<label class="sg"><input type="checkbox" data-i="${i}" ${s.on?'checked':''}><span data-go="${a}">${fmt(a)} → ${fmt(b)}</span><small>${(b-a).toFixed(1)} วิ</small></label>`});
+$('#au-ls').innerHTML=h||(done?'<p class="hint">ไม่พบช่วงเงียบ ลองเพิ่มความไวหรือลดเวลาเงียบขั้นต่ำ</p>':'');$('#au-ap').hidden=!n;$('#st1').textContent=n;$('#st2').textContent=tot.toFixed(1)+'s';$('#st3').textContent=fmt(Math.max(0,(P.clips.length?total():0)-tot));if(done)$('#au-st').textContent=SEG.length>400?'แสดงรายการ 400 ช่วงแรก (ตัดจริงทั้งหมด '+SEG.length+' ช่วง)':'';drawTL()}
+/* ---------- ปลั๊กอิน OME TV (แนวตั้ง: Ome บน / กล้องเราล่าง) ---------- */
+const OMD=()=>({on:false,split:50,top:0,bot:26,swap:false,fit:'cover'});
+function setSize(w,h){P.w=w;P.h=h;cv.width=w;cv.height=h;$('#as').value=w+'x'+h}
+function omClose(){$('#omp').hidden=true;document.body.classList.remove('om-open')}
+function omFill(){const o=P.ome||OMD();$('#om-sp').value=o.split;$('#om-tp').value=o.top;$('#om-bt').value=o.bot;$('#om-ft').value=o.fit;$('#om-sw').checked=!!o.swap;
+$('#om-v1').textContent=o.split+'%';$('#om-v2').textContent=o.top+'%';$('#om-v3').textContent=o.bot+'%';$('#om-st').textContent=o.on?'● เปิดใช้งานอยู่ — แนวตั้ง 1080×1920':'ยังไม่ได้ใช้งาน'}
+$('#bom').onclick=()=>{if(!$('#omp').hidden){omClose();return}plClose();pause();omFill();$('#omp').hidden=false;document.body.classList.add('om-open')};
+$('#bau').addEventListener('click',()=>{if(!$('#plg').hidden)omClose()});
+$('#om-x').onclick=omClose;
+$('#om-yes').onclick=()=>{if(!P.clips.some(k=>k.track==='v'&&M[k.mid]&&M[k.mid].type==='video'))return alert('ใส่คลิปวิดีโอที่อัดหน้าจอ Ome TV ลง Timeline ก่อน');
+const o=P.ome||(P.ome=OMD());if(!o.on)o.prev=[P.w,P.h];o.on=true;setSize(1080,1920);omFill();dirty()};
+$('#om-off').onclick=()=>{const o=P.ome;if(!o||!o.on)return;o.on=false;if(o.prev&&P.w===1080&&P.h===1920)setSize(o.prev[0],o.prev[1]);omFill();dirty()};
+$('#omp').addEventListener('input',e=>{const id=e.target.id;if(!id||!id.startsWith('om-'))return;const o=P.ome||(P.ome=OMD());
+if(id==='om-sp')o.split=+e.target.value;else if(id==='om-tp')o.top=+e.target.value;else if(id==='om-bt')o.bot=+e.target.value;else if(id==='om-ft')o.fit=e.target.value;else if(id==='om-sw')o.swap=e.target.checked;else return;
+$('#om-v1').textContent=o.split+'%';$('#om-v2').textContent=o.top+'%';$('#om-v3').textContent=o.bot+'%';dirty()});
+
+/* ---------- boot ---------- */
+(async()=>{try{db=await idb()}catch(e){db=null}
+let p=null;if(db){const all=await tx('projects','readonly',s=>s.getAll());all.sort((a,b)=>b.upd-a.upd);p=all[0]}
+await loadP(p||newP());requestAnimationFrame(loop)})();
+</script></body></html>
